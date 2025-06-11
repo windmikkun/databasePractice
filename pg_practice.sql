@@ -20,4 +20,4 @@ CREATE TABLE `jobs` (
   FOREIGN KEY `fk_user_id` (`user_id`) REFERENCES `users`(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- CREATE TABLE 'テーブル名'の後にカラムを入力しなかったらエラーになる。
+-- CREATE TABLE 'テーブル名'の後にカラムを入力しなかったらエラー。
