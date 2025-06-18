@@ -1,4 +1,4 @@
--- 問1
+-- 問1　
 -- 国名を全て抽出してください。
 SELECT name FROM countries;
 
