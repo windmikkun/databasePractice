@@ -54,7 +54,7 @@ SELECT name FROM countries WHERE country_code IN ('DZA', 'ALB') AND independeden
 
 -- 問14
 -- 全ての地方をグループ化せずに表示してください。
-SELECT region FROM countries;
+SELECT DISTINCT region FROM countries;
 
 
 -- 問15
@@ -119,10 +119,19 @@ SELECT * FROM person LEFT JOIN country ON person.country_code = country.code;
 
 -- 問28
 -- 全ての有名人の名前,国名、第一言語を出力してください。
-SELECT person.name, country.name, languages.language FROM person
-JOIN country ON person.country_code = country.code
-JOIN countrylanguage ON country.code = countrylanguage.country_code
-JOIN languages ON countrylanguage.language_code = languages.code;
+SELECT
+  p.name AS person_name,
+  c.name AS country_name,
+  (SELECT l.language 
+   FROM countrylanguage cl
+   JOIN languages l ON cl.language_code = l.code
+   WHERE cl.country_code = p.country_code
+   ORDER BY cl.percentage DESC 
+   LIMIT 1) AS primary_language
+FROM person p
+JOIN country c ON p.country_code = c.code;
+
+
 
 -- 問29
 -- 全ての有名人の名前と国名をに出力してください。 ただしテーブル結合せずサブクエリを使用してください。
